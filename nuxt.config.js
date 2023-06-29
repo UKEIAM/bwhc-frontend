@@ -1,34 +1,32 @@
 const pkg = require('./package')
 
-
 const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
 
 module.exports = {
   ssr: false,
 
-  /*
-  ** Headers of the page
-  */
+  // Headers of the page
   head: {
     title: "bwHealthCloud",
-
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: pkg.description }
     ],
     link: [
-
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'icon', type: 'image/x-icon', href: './favicon.ico' },
       {
         rel: 'stylesheet',
-        href: '/fontawesome-free-5.12-2.0-web/css/all.css'
+        href: './fontawesome-free-5.12-2.0-web/css/all.css'
       }
     ]
   },
 
-  env: {
+  router: {
+    base: '/bwhc'
+  },
 
+  env: {
     baseUrl: process.env.BASE_URL || 'http://localhost',
     port: process.env.port || ':9000',
 
@@ -49,40 +47,30 @@ module.exports = {
     logout: process.env.logout || '/bwhc/user/api/logout',
 
     version: 'v.2023-02'
-
   },
 
-  /*
-  ** Customize the progress-bar color
-  */
+  // Customize the progress-bar color
   loading: { color: '#fff' },
 
-  /*
-  ** Global CSS
-  */
+  // Global CSS
   css: [
     '~/assets/style/app.styl'
   ],
 
-  /*
-  ** Plugins to load before mounting the App
-  */
+  // Plugins to load before mounting the App
   plugins: [
     '@/plugins/vuetify'
   ],
 
-  /*
-  ** Nuxt.js modules
-  */
+  // Nuxt.js modules
   modules: [
     'nuxt-material-design-icons',
     '@nuxtjs/toast',
     '@nuxtjs/axios',
     '@nuxtjs/auth-next'
   ],
-  /*
-  ** Build configuration
-  */
+
+  // Build configuration
   build: {
     transpile: ['vuetify/lib'],
     plugins: [new VuetifyLoaderPlugin()],
@@ -91,9 +79,6 @@ module.exports = {
         import: ["~assets/style/variables.styl"]
       }
     },
-
-    extend(config, ctx) {
-
-    }
+    extend(config, ctx) {}
   }
 }
